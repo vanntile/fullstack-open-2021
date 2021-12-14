@@ -9,7 +9,7 @@ This repo contains my own solutions and coursework for the
 
 ## Completion checklist
 
-- [ ] Part 0: Fundamentals of Web apps
+- [x] Part 0: Fundamentals of Web apps
 - [ ] Part 1: Introduction to React
 - [ ] Part 2: Communicating with server
 - [ ] Part 3: Programming a server with NodeJS and Express
