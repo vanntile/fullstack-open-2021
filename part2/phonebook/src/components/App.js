@@ -1,12 +1,21 @@
-import React, { useState } from 'react'
-import { defaultPhonebook } from '../lib/utils'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import Filter from './Filter'
 import PersonsForm from './PersonForm'
 import Persons from './Persons'
 
 const App = () => {
-  const [persons, setPersons] = useState(defaultPhonebook)
+  const [persons, setPersons] = useState([])
   const [searchField, setSearchField] = useState('')
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get('http://localhost:3001/persons')
+      setPersons(response.data)
+    }
+
+    fetchData()
+  }, [])
 
   const addToPhonebook = ({ name, number }) => {
     const existingName = persons.find((e) => e.name === name)
