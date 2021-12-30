@@ -33,8 +33,9 @@ log.info(`Connecting to ${config.PORT}`)
 // Routes
 app.use('/api', routes)
 
-app.get('/info', (_req, res) => {
-  res.send(`<p>Phonebook has info for ${peopleService.count()} people.</p><p>${new Date().toString()}</p>`)
+app.get('/info', async (_req, res) => {
+  const count = await peopleService.count()
+  res.send(`<p>Phonebook has info for ${count} people.</p><p>${new Date().toString()}</p>`)
 })
 
 app.use(middleware.errorHandler)

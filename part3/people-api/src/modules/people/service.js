@@ -1,35 +1,29 @@
 const { ServerError } = require('../../utils/error')
-let { people } = require('../../utils/data')
+const Person = require('../../models/person')
 
-const get = () => people
+const get = async () => await Person.find({})
 
-const count = () => people.length
+const count = async () => await Person.countDocuments({})
 
-const getById = ({ id }) => {
-  const person = people.find((p) => p.id == id)
+const getById = async ({ id }) => {
+  const person = await Person.findById(id)
 
   if (!person) throw new ServerError(`Person does not exist with id ${id}`, 404)
 
   return person
 }
 
-const create = ({ name, number }) => {
-  if (people.find((e) => e.name === name)) throw new ServerError(`Name '${name}' already exists`, 400)
+const create = async ({ name, number }) => await new Person({ name, number }).save()
 
-  const newEntry = { id: Math.floor(Math.random() * 10 ** 12), name, number }
-  people.push(newEntry)
+const update = async ({ id, name, number }) => await Person.updateOne({ _id: id }, { name, number })
 
-  return newEntry
-}
-
-const remove = ({ id }) => {
-  people = people.filter((e) => e.id != id)
-}
+const remove = async ({ id }) => await Person.deleteOne({ _id: id })
 
 module.exports = {
   get,
   count,
   getById,
   create,
+  update,
   remove,
 }

@@ -4,31 +4,40 @@ const { ServerError } = require('../../utils/error')
 
 const router = Router()
 
-router.get('/', (_req, res) => {
-  res.json(peopleService.get())
+router.get('/', async (_req, res) => {
+  res.json(await peopleService.get())
 })
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const { name, number } = req.body
   if (!name || !number) throw new ServerError('Missing required fields', 400)
 
-  const person = peopleService.create({ name, number })
+  const person = await peopleService.create({ name, number })
 
   res.status(201).json(person)
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   const { id } = req.params
 
-  const person = peopleService.getById({ id })
+  const person = await peopleService.getById({ id })
 
   res.json(person)
 })
 
-router.delete('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
+  const { id } = req.params
+  const { name, number } = req.body
+
+  const person = await peopleService.update({ id, name, number })
+
+  res.json(person)
+})
+
+router.delete('/:id', async (req, res) => {
   const { id } = req.params
 
-  peopleService.remove({ id })
+  await peopleService.remove({ id })
 
   res.status(204).end()
 })
