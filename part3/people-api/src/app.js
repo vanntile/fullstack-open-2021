@@ -15,7 +15,7 @@ const app = express()
 
 // Middleware
 app.use(helmet())
-app.use(cors({ origin: '*' }))
+app.use(cors())
 app.use(express.json())
 morgan.token('data', (req, _) => (req.method === 'POST' ? JSON.stringify(req.body) : ''))
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :data'))
