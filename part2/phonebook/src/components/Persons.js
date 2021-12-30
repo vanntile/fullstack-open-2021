@@ -1,7 +1,7 @@
 import React from 'react'
 import personService from '../services/persons'
 
-const Persons = ({ persons, fetchPeople }) => (
+const Persons = ({ persons, fetchPeople, notify }) => (
   <ul>
     {persons.map((p) => (
       <li key={p.id}>
@@ -9,8 +9,14 @@ const Persons = ({ persons, fetchPeople }) => (
         <button
           onClick={async () => {
             if (window.confirm(`Do you want to remove entry for ${p.name}`)) {
-              await personService.remove(p.id)
-              await fetchPeople()
+              try {
+                await personService.remove(p.id)
+                await fetchPeople()
+              } catch (e) {
+                console.error(e)
+
+                notify({ type: 'error', message: `Error: ${p.name} has already been removed from the server` })
+              }
             }
           }}
         >
