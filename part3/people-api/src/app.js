@@ -18,6 +18,7 @@ app.use(
   helmet.contentSecurityPolicy({
     useDefaults: true,
     directives: {
+      // eslint-disable-next-line quotes
       'script-src': ["'self'", "'unsafe-inline'"],
     },
   }),

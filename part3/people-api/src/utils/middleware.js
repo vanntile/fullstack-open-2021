@@ -1,6 +1,6 @@
 const log = require('./logger')
 
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res, _next) => {
   log.error(err)
 
   let status = 500

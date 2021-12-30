@@ -1,7 +1,6 @@
 const Router = require('express').Router
 const peopleService = require('./service')
 const { ServerError } = require('../../utils/error')
-const logger = require('../../utils/logger')
 
 const router = Router()
 
