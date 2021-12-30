@@ -1,11 +1,11 @@
 const express = require('express')
 const cors = require('cors')
 const helmet = require('helmet')
-const logger = require('pino')()
-const loggerMiddleware = require('pino-http')()
+const morgan = require('morgan')
 
 const peopleService = require('./modules/people/service')
 const config = require('./utils/config')
+const log = require('./utils/logger')
 const middleware = require('./utils/middleware')
 
 require('express-async-errors')
@@ -14,12 +14,13 @@ const routes = require('./routes')
 const app = express()
 
 // Middleware
-app.use(loggerMiddleware)
 app.use(helmet())
 app.use(cors({ origin: '*' }))
 app.use(express.json())
+morgan.token('data', (req, _) => (req.method === 'POST' ? JSON.stringify(req.body) : ''))
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :data'))
 
-logger.info(`Connecting to ${config.PORT}`)
+log.info(`Connecting to ${config.PORT}`)
 
 // Routes
 app.use('/api', routes)

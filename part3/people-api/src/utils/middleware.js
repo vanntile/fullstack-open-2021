@@ -1,5 +1,7 @@
+const log = require('./logger')
+
 const errorHandler = (err, req, res, next) => {
-  req.log.error(err)
+  log.error(err)
 
   let status = 500
   let message = 'Something Bad Happened'
