@@ -38,9 +38,10 @@ const App = () => {
 
           return true
         } catch (e) {
-          console.error(e)
-
-          notify({ type: 'error', message: `Error: ${name} has already been removed from the server` })
+          const data = e.response.data
+          if (data && data.message) notify({ type: 'error', message: data.message })
+          else notify({ type: 'error', message: `Error: ${name} has already been removed from the server` })
+          return false
         }
       } else {
         return false
@@ -48,10 +49,14 @@ const App = () => {
     }
 
     const response = await personService.create({ name, number })
-    setPersons([...persons, response.data])
-    notify({ type: 'success', message: `Success: ${name} has been added to the phonebook.` })
-
-    return true
+    try {
+      setPersons([...persons, response.data])
+      notify({ type: 'success', message: `Success: ${name} has been added to the phonebook.` })
+      return true
+    } catch (e) {
+      if (e.message) notify({ type: 'error', message: e.message })
+      return false
+    }
   }
 
   return (

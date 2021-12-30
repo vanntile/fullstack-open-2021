@@ -15,7 +15,8 @@ const getById = async ({ id }) => {
 
 const create = async ({ name, number }) => await new Person({ name, number }).save()
 
-const update = async ({ id, name, number }) => await Person.updateOne({ _id: id }, { name, number })
+const update = async ({ id, name, number }) =>
+  await Person.updateOne({ _id: id }, { name, number }, { runValidators: true })
 
 const remove = async ({ id }) => await Person.deleteOne({ _id: id })
 
