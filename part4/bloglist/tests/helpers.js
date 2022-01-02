@@ -1,7 +1,22 @@
+const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 const Blog = require('../src/models/blog')
+const User = require('../src/models/user')
 
 const WAIT_TIME = 2 * 1000
+
+const initialUsers = [
+  {
+    username: 'root',
+    name: 'Administrator',
+    password: 'secret',
+  },
+  {
+    username: 'O5-1',
+    name: 'Head of the council',
+    password: 'secret',
+  },
+]
 
 const initialBlogs = [
   {
@@ -18,6 +33,12 @@ const initialBlogs = [
   },
 ]
 
+const newUser = {
+  username: 'mekkanhe',
+  name: 'The Broken God',
+  password: 'initiator',
+}
+
 const newPost = {
   author: 'Author 3',
   title: 'title 3',
@@ -26,25 +47,43 @@ const newPost = {
 }
 
 const initDatabase = async () => {
-  await Blog.deleteMany()
+  await User.deleteMany({})
+  await Blog.deleteMany({})
 
-  await Promise.all(initialBlogs.map((b) => Blog(b).save()))
+  initialUsers.forEach(async (user) => {
+    user.password = await bcrypt.hash(user.password, 10)
+  })
+
+  await Promise.all(initialUsers.map((e) => User(e).save()))
+
+  const user = await User.findOne({ username: 'root' })
+
+  await Promise.all(initialBlogs.map((b) => Blog({ ...b, user: user._id }).save()))
+
+  const blogs = await Blog.find({})
+  blogs.forEach((blog) => {
+    user.blogs = user.blogs.concat(blog._id)
+  })
+
+  await user.save({ validateModifiedOnly: true })
 }
 
 const closeDatabase = () => {
   mongoose.connection.close()
 }
 
-const blogsInDb = async () => {
-  const blogs = await Blog.find({})
-  return blogs.map((e) => e.toJSON())
-}
+const blogsInDb = async () => (await Blog.find({})).map((e) => e.toJSON())
+
+const usersInDb = async () => (await User.find({})).map((e) => e.toJSON())
 
 module.exports = {
   WAIT_TIME,
-  newPost,
+  initialUsers,
   initialBlogs,
+  newUser,
+  newPost,
   initDatabase,
   closeDatabase,
   blogsInDb,
+  usersInDb,
 }

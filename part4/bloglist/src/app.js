@@ -5,6 +5,7 @@ const helmet = require('helmet')
 const config = require('./utils/config')
 const middleware = require('./utils/middleware')
 const log = require('./utils/logger')
+require('./utils/db')
 
 // Set up request logging
 const pino = require('pino-http')({

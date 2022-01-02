@@ -45,9 +45,11 @@ describe('POST /blogs', () => {
   test(
     'new posts can be added',
     async () => {
+      const user = (await helpers.usersInDb())[0]
+
       const response = await api
         .post(`/api/blogs`)
-        .send(helpers.newPost)
+        .send({ ...helpers.newPost, userId: user.id })
         .expect(201)
         .expect('Content-Type', /application\/json/)
 
@@ -66,10 +68,12 @@ describe('POST /blogs', () => {
   test(
     'likes default value is 0',
     async () => {
+      const user = (await helpers.usersInDb())[0]
+
       const { title, author } = helpers.newPost
       const response = await api
         .post(`/api/blogs`)
-        .send({ title, author })
+        .send({ title, author, userId: user.id })
         .expect(201)
         .expect('Content-Type', /application\/json/)
 
@@ -81,10 +85,12 @@ describe('POST /blogs', () => {
   test(
     'missing title and url returns client error',
     async () => {
+      const user = (await helpers.usersInDb())[0]
+
       const { author, likes } = helpers.newPost
       await api
         .post(`/api/blogs`)
-        .send({ author, likes })
+        .send({ author, likes, userId: user.id })
         .expect(400)
         .expect('Content-Type', /application\/json/)
     },
