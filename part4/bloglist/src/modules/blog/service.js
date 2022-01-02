@@ -1,5 +1,6 @@
 const Blog = require('../../models/blog')
 const User = require('../../models/user')
+const { ServerError } = require('../../utils/error')
 
 const get = async () => await Blog.find({}).populate('user', { username: 1, name: 1, id: 1 })
 
@@ -30,6 +31,14 @@ const update = async ({ id, title, author, url, likes }) => {
   return await Blog.findOne({ id })
 }
 
-const remove = async ({ id }) => await Blog.deleteOne({ _id: id })
+const remove = async ({ id, userId }) => {
+  const user = await User.findById(userId)
+
+  const blog = await Blog.findById(id)
+
+  if (user.id.toString() !== blog.user.toString()) throw new ServerError(`User is not post's owner`, 401)
+
+  await Blog.deleteOne({ _id: id })
+}
 
 module.exports = { get, getById, create, update, remove }

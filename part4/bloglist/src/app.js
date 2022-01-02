@@ -31,6 +31,7 @@ app.use(
 app.use(cors())
 app.use(express.json())
 app.use(pino)
+app.use(middleware.tokenExtractor)
 
 log.info(`Connecting to ${config.PORT}`)
 

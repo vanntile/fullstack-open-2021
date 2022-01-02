@@ -50,11 +50,11 @@ const initDatabase = async () => {
   await User.deleteMany({})
   await Blog.deleteMany({})
 
-  initialUsers.forEach(async (user) => {
-    user.password = await bcrypt.hash(user.password, 10)
-  })
+  const newUsers = await Promise.all(
+    initialUsers.map(async (user) => ({ ...user, password: await bcrypt.hash(user.password, 10) })),
+  )
 
-  await Promise.all(initialUsers.map((e) => User(e).save()))
+  await Promise.all(newUsers.map((e) => User(e).save()))
 
   const user = await User.findOne({ username: 'root' })
 

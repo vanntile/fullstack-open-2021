@@ -45,11 +45,16 @@ describe('POST /blogs', () => {
   test(
     'new posts can be added',
     async () => {
-      const user = (await helpers.usersInDb())[0]
+      const user = helpers.initialUsers[0]
+      const { username, password } = user
 
-      const response = await api
+      let response = await api.post('/api/login').send({ username, password }).expect(200)
+      expect(response.body.token).toBeDefined()
+
+      response = await api
         .post(`/api/blogs`)
-        .send({ ...helpers.newPost, userId: user.id })
+        .send({ ...helpers.newPost })
+        .set({ Authorization: `Bearer ${response.body.token}` })
         .expect(201)
         .expect('Content-Type', /application\/json/)
 
@@ -68,12 +73,17 @@ describe('POST /blogs', () => {
   test(
     'likes default value is 0',
     async () => {
-      const user = (await helpers.usersInDb())[0]
+      const user = helpers.initialUsers[0]
+      const { username, password } = user
+
+      let response = await api.post('/api/login').send({ username, password }).expect(200)
+      expect(response.body.token).toBeDefined()
 
       const { title, author } = helpers.newPost
-      const response = await api
+      response = await api
         .post(`/api/blogs`)
-        .send({ title, author, userId: user.id })
+        .send({ title, author })
+        .set({ Authorization: `Bearer ${response.body.token}` })
         .expect(201)
         .expect('Content-Type', /application\/json/)
 
@@ -85,13 +95,30 @@ describe('POST /blogs', () => {
   test(
     'missing title and url returns client error',
     async () => {
-      const user = (await helpers.usersInDb())[0]
+      const user = helpers.initialUsers[0]
+      const { username, password } = user
+
+      let response = await api.post('/api/login').send({ username, password }).expect(200)
+      expect(response.body.token).toBeDefined()
 
       const { author, likes } = helpers.newPost
       await api
         .post(`/api/blogs`)
-        .send({ author, likes, userId: user.id })
+        .send({ author, likes })
+        .set({ Authorization: `Bearer ${response.body.token}` })
         .expect(400)
+        .expect('Content-Type', /application\/json/)
+    },
+    helpers.WAIT_TIME,
+  )
+
+  test(
+    'missing authorization token returns unauthorized error',
+    async () => {
+      await api
+        .post(`/api/blogs`)
+        .send({ ...helpers.newPost })
+        .expect(401)
         .expect('Content-Type', /application\/json/)
     },
     helpers.WAIT_TIME,
@@ -135,12 +162,50 @@ describe('DELETE /blogs/:id', () => {
   test(
     'delete existing post',
     async () => {
+      const user = helpers.initialUsers[0]
+      const { username, password } = user
+
+      const response = await api.post('/api/login').send({ username, password }).expect(200)
+      expect(response.body.token).toBeDefined()
+
       const blogsAtBeginning = await helpers.blogsInDb()
       const id = blogsAtBeginning[0].id
-      await api.delete(`/api/blogs/${id}`).expect(204)
+      await api
+        .delete(`/api/blogs/${id}`)
+        .set({ Authorization: `Bearer ${response.body.token}` })
+        .expect(204)
 
       const blogsAtEnd = await helpers.blogsInDb()
       expect(blogsAtEnd.map(({ id }) => id)).not.toContain(id)
+    },
+    helpers.WAIT_TIME,
+  )
+
+  test(
+    'delete by another user refused',
+    async () => {
+      const user = helpers.initialUsers[1]
+      const { username, password } = user
+
+      const response = await api.post('/api/login').send({ username, password }).expect(200)
+      expect(response.body.token).toBeDefined()
+
+      const blogsAtBeginning = await helpers.blogsInDb()
+      const id = blogsAtBeginning[0].id
+      await api
+        .delete(`/api/blogs/${id}`)
+        .set({ Authorization: `Bearer ${response.body.token}` })
+        .expect(401)
+    },
+    helpers.WAIT_TIME,
+  )
+
+  test(
+    'missing authorization token returns unauthorized error',
+    async () => {
+      const blogsAtBeginning = await helpers.blogsInDb()
+      const id = blogsAtBeginning[0].id
+      await api.delete(`/api/blogs/${id}`).expect(401)
     },
     helpers.WAIT_TIME,
   )
