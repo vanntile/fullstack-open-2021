@@ -12,7 +12,7 @@ mongoose
     log.info('Connected to MongoDB')
   })
   .catch((error) => {
-    log.info('Error connecting to MongoDB:', error.message)
+    log.info(`Error connecting to MongoDB: ${error.message}`)
   })
 
 const blogSchema = new mongoose.Schema({

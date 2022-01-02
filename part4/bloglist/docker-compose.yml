@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  mongo-test:
+    image: mongo:5.0-focal
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: testuser
+      MONGO_INITDB_ROOT_PASSWORD: testpassword
+      MONGO_INITDB_DATABASE: bloglist
+    volumes:
+      - bloglist_mongo:/data/db
+    network_mode: host
+
+  mongo-express:
+    image: mongo-express:0.54.0
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: testuser
+      ME_CONFIG_MONGODB_ADMINPASSWORD: testpassword
+      ME_CONFIG_MONGODB_SERVER: localhost
+      ME_CONFIG_MONGODB_PORT: 27017
+    network_mode: host
+
+volumes:
+  bloglist_mongo:
