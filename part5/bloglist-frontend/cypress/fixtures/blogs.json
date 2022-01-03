@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Article 1",
+    "author": "A star",
+    "url": "https://example.com",
+    "likes": 1
+  },
+  {
+    "title": "Article 2",
+    "author": "A star",
+    "url": "https://example.com",
+    "likes": 2
+  },
+  {
+    "title": "Article 3",
+    "author": "A star",
+    "url": "https://example.com",
+    "likes": 3
+  }
+]

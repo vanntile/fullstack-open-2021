@@ -93,11 +93,13 @@ const App = () => {
             <WritePost submit={handleCreate} notify={notify} />
           </Togglable>
           <h2>Existing posts</h2>
-          {posts
-            .sort((a, b) => b.likes - a.likes)
-            .map((e) => (
-              <Blog key={e.id} blog={e} user={user} refetch={fetchPosts} update={updatePost} notify={notify} />
-            ))}
+          <div>
+            {posts
+              .sort((a, b) => b.likes - a.likes)
+              .map((e) => (
+                <Blog key={e.id} blog={e} user={user} refetch={fetchPosts} update={updatePost} notify={notify} />
+              ))}
+          </div>
         </>
       )}
     </div>
