@@ -8,12 +8,18 @@ const setToken = (newToken) => {
 
 const getAll = async () => (await axios.get(baseUrl)).data
 
-const postNew = async (newPost) => (await axios.post(baseUrl, newPost, { headers: { Authorization: token } })).data
+const create = async (newPost) => (await axios.post(baseUrl, newPost, { headers: { Authorization: token } })).data
+
+const update = async ({ id, ...updatedPost }) => (await axios.put(`${baseUrl}/${id}`, updatedPost)).data
+
+const remove = async ({ id }) => await axios.delete(`${baseUrl}/${id}`, { headers: { Authorization: token } })
 
 const methods = {
   setToken,
   getAll,
-  postNew,
+  create,
+  update,
+  remove,
 }
 
 export default methods

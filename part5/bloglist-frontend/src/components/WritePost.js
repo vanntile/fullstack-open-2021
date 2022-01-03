@@ -4,15 +4,17 @@ import { handleChange } from '../lib/utils'
 const WritePost = ({ submit, notify }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
+  const [url, setUrl] = useState('')
 
   const submitHandler = (event) => {
     event.preventDefault()
 
     if (title === '' && author === '') return notify({ message: 'Missing both title and author', type: 'error' })
 
-    if (submit({ author, title })) {
+    if (submit({ author, title, url })) {
       setTitle('')
       setAuthor('')
+      setUrl('')
     }
   }
 
@@ -25,6 +27,9 @@ const WritePost = ({ submit, notify }) => {
 
       <label htmlFor="author">author</label>
       <input value={author} onChange={handleChange(setAuthor)} type="text" name="author" />
+
+      <label htmlFor="url">URL</label>
+      <input value={url} onChange={handleChange(setUrl)} type="text" name="url" />
 
       <button type="submit">Create</button>
     </form>

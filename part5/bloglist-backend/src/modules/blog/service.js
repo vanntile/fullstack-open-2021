@@ -5,7 +5,7 @@ const { ServerError } = require('../../utils/error')
 const get = async () => await Blog.find({}).populate('user', { username: 1, name: 1, id: 1 })
 
 const getById = async ({ id }) => {
-  const entry = await Blog.find({ id })
+  const entry = await Blog.find({ id }).populate('user', { username: 1, name: 1, id: 1 })
 
   if (!entry) throw new ServerError(`Blog does not exist with id ${id}`, 404)
 
@@ -22,13 +22,13 @@ const create = async (data) => {
   user.blogs = user.blogs.concat(entry._id)
   await user.save({ validateModifiedOnly: true })
 
-  return entry
+  return await Blog.findById(entry.id).populate('user', { username: 1, name: 1, id: 1 })
 }
 
 const update = async ({ id, title, author, url, likes }) => {
   await Blog.updateOne({ _id: id }, { title, author, url, likes }, { runValidators: true })
 
-  return await Blog.findOne({ id })
+  return await Blog.findById(id).populate('user', { username: 1, name: 1, id: 1 })
 }
 
 const remove = async ({ id, userId }) => {
