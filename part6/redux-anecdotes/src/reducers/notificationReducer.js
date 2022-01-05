@@ -15,4 +15,15 @@ export const notify = (content) => ({ type: 'SHOW_NOTIFICATION', data: { content
 
 export const hideNotification = () => ({ type: 'HIDE_NOTIFICATION' })
 
+const later = (delay, value) => new Promise((resolve) => setTimeout(resolve, delay, value))
+
+export const setNotification =
+  (content, timeout = 5) =>
+  async (dispatch) => {
+    dispatch(notify(content))
+    setTimeout(() => {
+      dispatch(hideNotification())
+    }, timeout * 1000)
+  }
+
 export default reducer
