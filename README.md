@@ -13,7 +13,7 @@ This repo contains my own solutions and coursework for the
 - [x] 3: Programming a server with NodeJS and Express
 - [x] 4: Testing Express servers, user administration
 - [x] 5: Testing React apps
-- [ ] 6: State management with Redux
+- [x] 6: State management with Redux
 - [ ] 7: React router, custom hooks, styling app with CSS and webpack
 - [ ] 8: GraphQL
 - [ ] 9: TypeScript
