@@ -1,11 +1,13 @@
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import React, { useState } from 'react'
-import { ALL_AUTHORS, EDIT_AUTHOR } from '../graphql'
+import { ALL_AUTHORS, EDIT_AUTHOR, GET_USER } from '../graphql'
 
 const AuthorUpdate = ({ authors }) => {
-  const [name, setName] = useState('')
+  const [name, setName] = useState(authors[0]?.name ?? '')
   const [year, setYear] = useState(1900)
-
+  const user = useQuery(GET_USER, {
+    pollInterval: 1000,
+  })
   const [updateAuthor] = useMutation(EDIT_AUTHOR, {
     refetchQueries: [{ query: ALL_AUTHORS }],
   })
@@ -15,11 +17,10 @@ const AuthorUpdate = ({ authors }) => {
 
     updateAuthor({ variables: { name, setBornTo: Number(year) } })
 
-    setName('')
     setYear(1900)
   }
 
-  return (
+  return user.data?.me ? (
     <div>
       <h2>Set birthyear</h2>
       <form onSubmit={submit}>
@@ -37,6 +38,8 @@ const AuthorUpdate = ({ authors }) => {
         <button type="submit">updateAuthor</button>
       </form>
     </div>
+  ) : (
+    <div>Login to edit authors birth year</div>
   )
 }
 

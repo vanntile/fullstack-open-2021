@@ -79,11 +79,11 @@ const resolvers = {
         const entry = new Book({ title, published, genres, author: savedAuthor._id })
 
         const savedEntry = await entry.save()
+
+        return await Book.findById(savedEntry._id).populate('author', { name: 1, born: 1 })
       } catch (error) {
         throw new UserInputError(error.message, { invalidArgs: args })
       }
-
-      return await Book.findById(savedEntry._id).populate('author', { name: 1, born: 1 })
     },
     editAuthor: async (root, args, context) => {
       if (!context.currentUser) throw new AuthenticationError('User unauthenticated')
