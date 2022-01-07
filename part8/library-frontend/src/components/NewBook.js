@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import React, { useState } from 'react'
-import { ALL_AUTHORS, ALL_BOOKS, CREATE_PERSON } from '../graphql'
+import { ALL_AUTHORS, ALL_BOOKS, CREATE_BOOK } from '../graphql'
 
 const NewBook = (props) => {
   const [title, setTitle] = useState('')
@@ -8,8 +8,12 @@ const NewBook = (props) => {
   const [published, setPublished] = useState('')
   const [genre, setGenre] = useState('')
   const [genres, setGenres] = useState([])
-  const [createBook] = useMutation(CREATE_PERSON, {
+  const [createBook, { error }] = useMutation(CREATE_BOOK, {
     refetchQueries: [{ query: ALL_AUTHORS }, { query: ALL_BOOKS }],
+    onError: (err) => {
+      console.log('error found')
+      console.error(err)
+    },
   })
 
   if (!props.show) {
@@ -57,6 +61,7 @@ const NewBook = (props) => {
         <div>genres: {genres.join(' ')}</div>
         <button type="submit">create book</button>
       </form>
+      {error && <p>{error.message}</p>}
     </div>
   )
 }
