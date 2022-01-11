@@ -12,7 +12,7 @@ export const toNewPatient = (data: unknown): Omit<SafePatient, 'id'> => {
 
   if (!dateOfBirth || !isString(dateOfBirth)) throw new ServerError('Missing field: dateOfBirth', 400)
 
-  if (!gender || !isString(gender) || !Object.values(Gender).includes(gender))
+  if (!gender || !isString(gender) || !Object.values(Gender).includes(gender as Gender))
     throw new ServerError('Missing field: gender', 400)
 
   if (!occupation || !isString(occupation)) throw new ServerError('Missing field: occupation', 400)
