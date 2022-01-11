@@ -6,6 +6,7 @@ import { apiBaseUrl } from '../constants';
 import { addPatient, useStateValue } from '../state';
 import { Patient } from '../types';
 import { Icon } from 'semantic-ui-react';
+import EntryDetail from './EntryDetails';
 
 const PatientDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -26,14 +27,20 @@ const PatientDetail: React.FC = () => {
     void getPatientDetail();
   }, [dispatch]);
 
-  return (
+  return patients && patients[id] ? (
     <>
       <h1>
         {patients[id].name} <Icon name={patients[id].gender === 'female' ? 'woman' : 'man'} />
       </h1>
       <p>ssn: {patients[id].ssn}</p>
       <p>occupation: {patients[id].occupation}</p>
+      {patients[id].entries.length !== 0 && <h2>Entries</h2>}
+      {patients[id].entries.map((e) => (
+        <EntryDetail key={e.id} entry={e} />
+      ))}
     </>
+  ) : (
+    <>Loading...</>
   );
 };
 

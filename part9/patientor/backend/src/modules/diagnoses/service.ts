@@ -1,7 +1,5 @@
-import data from '../../../data/diagnoses.json'
-
 const getEntries = (): Diagnosis[] => {
-  return data
+  return []
 }
 
 const addEntry = (): boolean | null => {

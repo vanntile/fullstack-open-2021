@@ -1,8 +1,6 @@
 import { toNewPatient } from '../../utils/patients'
 import { v1 as uuid } from 'uuid'
-import data from '../../../data/patients.json'
-
-const patients = data as Patient[]
+import patients from '../../misc/patients'
 
 const getAll = (): SafePatient[] => patients.map((d) => ({ ...d, ssn: undefined }))
 
