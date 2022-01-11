@@ -4,15 +4,14 @@ import data from '../../../data/patients.json'
 
 const patients = data as Patient[]
 
-const getEntries = (): SafePatient[] => {
-  return patients.map((d) => ({ ...d, ssn: undefined }))
-}
+const getAll = (): SafePatient[] => patients.map((d) => ({ ...d, ssn: undefined }))
 
-const addEntry = (data: unknown): SafePatient | undefined => {
+const create = (data: unknown): SafePatient | undefined => {
   const patient: Omit<SafePatient, 'id'> = toNewPatient(data)
 
-  const newPatient: SafePatient = {
+  const newPatient: Patient = {
     id: uuid(),
+    entries: [],
     ...patient,
   }
   patients.push(newPatient)
@@ -20,7 +19,10 @@ const addEntry = (data: unknown): SafePatient | undefined => {
   return newPatient
 }
 
+const getById = (id: string): Patient | undefined => patients.find((e) => e.id === id)
+
 export default {
-  getEntries,
-  addEntry,
+  getAll,
+  create,
+  getById,
 }

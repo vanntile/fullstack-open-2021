@@ -7,6 +7,10 @@ interface Diagnosis {
 type MALE = 'male'
 type FEMALE = 'female'
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface Entry {
+}
+
 interface Patient {
   id: string
   name: string
@@ -14,6 +18,7 @@ interface Patient {
   ssn?: string
   gender: MALE | FEMALE
   occupation: string
+  entries: Entry[]
 }
 
-type SafePatient = Omit<Patient, 'ssn'>
+type SafePatient = Omit<Patient, 'ssn' | 'entries'>
