@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
     command: npm run dev
     ports:
       - "${PORT}:${PORT}"
@@ -11,6 +13,8 @@ services:
       REDIS_URL: ${REDIS_URL}
     networks:
       - app_backend
+    volumes:
+      - ./:/usr/src/app
 
   mongo:
     image: mongo:5.0-focal
