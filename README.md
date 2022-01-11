@@ -19,5 +19,5 @@ This repo contains my own solutions and coursework for the
 - [x] 9: TypeScript
 - [ ] 10: React Native
 - [ ] 11: CI/CD
-- [ ] 12: Containers
+- [x] 12: Containers
 - [ ] 13: Using relational databases
