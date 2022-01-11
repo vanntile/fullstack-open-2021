@@ -1,0 +1,59 @@
+Script started on 2022-01-11 22:12:16+02:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="96" LINES="47"]
+[0m[38;5;242m[49m[39m[27m[24m[K
+
+[2A7[0m[49m[39m[0m[44m[38;5;254m  [1m[38;5;254m[44m[38;5;255m~[0m[38;5;255m[44m[44m[38;5;254m/[38;5;250msr[0m[38;5;250m[44m[44m[38;5;254m/[1m[38;5;254m[44m[38;5;255mfullstack-open-2021[0m[38;5;255m[44m[44m[38;5;254m/part12/[38;5;250mp[0m[38;5;250m[44m[44m[38;5;254m/todo-app/[1m[38;5;254m[44m[38;5;255mtodo-backend[0m[38;5;255m[44m[44m[38;5;254m[0m[38;5;254m[44m[44m[38;5;254m [0m[38;5;254m[44m[49m[34m[0m[34m[49m[39m[38;5;242m────────────────────[0m[38;5;242m[49m[34m[0m[34m[44m[38;5;254m 22:12:16[0m[38;5;254m[44m[44m[38;5;254m [0m[38;5;254m[44m[44m[38;5;254m [0m[38;5;254m[44m[49m[39m[38;5;242m─╮
+[0m[38;5;242m[49m[39m[0m[49m[38;5;76m❯[0m[38;5;76m[49m[38;5;76m[0m[38;5;76m[49m[30m[0m[30m[49m[39m [0m[49m[39m                                                                                           [0m[38;5;242m[49m[39m[38;5;242m─╯[0m[38;5;242m[49m[39m[27m[24m[2C[?2004h[?25l8[0m[49m[39m[27m[24m[J]2;vanntile@vanntile:~/src/fullstack-open-2021/part12/part12-containers-applications/todo-app/todo-backend]1;../todo-backend[0m[38;5;254m[49m[39m[27m[24m[1m[7m%[27m[1m[0m                                                                                               [0m[49m[39m[27m[24m[K[0m[27m[24m[J[0m[38;5;242m[49m[39m
+[A[0m[44m[38;5;254m  [1m[38;5;254m[44m[38;5;255m~[0m[38;5;255m[44m[44m[38;5;254m/[38;5;250msr[0m[38;5;250m[44m[44m[38;5;254m/[1m[38;5;254m[44m[38;5;255mfullstack-open-2021[0m[38;5;255m[44m[44m[38;5;254m/part12/[38;5;250mp[0m[38;5;250m[44m[44m[38;5;254m/[38;5;250mt[0m[38;5;250m[44m[44m[38;5;254m/[1m[38;5;254m[44m[38;5;255mtodo-backend[0m[38;5;255m[44m[44m[38;5;254m[0m[38;5;254m[44m[44m[38;5;254m [0m[38;5;254m[44m[43m[34m[0m[34m[43m[43m[30m  [30m [30mmaster [30m!3 [30m?6[0m[30m[43m[43m[30m [0m[30m[43m[49m[33m[0m[33m[49m[39m[38;5;242m
+[0m[38;5;242m[49m[39m[0m[49m[38;5;76m❯[0m[38;5;76m[49m[38;5;76m[0m[38;5;76m[49m[30m[0m[30m[49m[39m [0m[49m[39m[K[91C[0m[49m[39m[38;5;242m─╯[39m[93D[?1h=[?12l[?25h[?2004h[32md[39m[33md[33mo[39m[1m[31md[1m[31mo[1m[31mc[0m[39m[1m[31mc[1m[31mk[0m[39m[1m[31mk[1m[31me[0m[39m[0m[32md[0m[32mo[0m[32mc[0m[32mk[0m[32me[32mr[39m [4me[24m[4me[4mx[24m[4mx[4me[24m[24me[24mx[24mec -it todo-backend_mongo_run_9dae057ba47e [4mb[24m[24mbash[56D[39m[7md[39m[7mo[39m[7mc[39m[7mk[39m[7me[39m[7mr[7m [7me[7mx[7me[7mc[7m [7m-[7mi[7mt[7m [7mt[7mo[7md[7mo[7m-[7mb[7ma[7mc[7mk[7me[7mn[7md[7m_[7mm[7mo[7mn[7mg[7mo[7m_[7mr[7mu[7mn[7m_[7m9[7md[7ma[7me[7m0[7m5[7m7[7mb[7ma[7m4[7m7[7me[7m [7mb[7ma[7ms[7mh[27m[56D[27m[32md[27m[32mo[27m[32mc[27m[32mk[27m[32me[27m[32mr[39m[27m [27me[27mx[27me[27mc[27m [27m-[27mi[27mt[27m [27mt[27mo[27md[27mo[27m-[27mb[27ma[27mc[27mk[27me[27mn[27md[27m_[27mm[27mo[27mn[27mg[27mo[27m_[27mr[27mu[27mn[27m_[27m9[27md[27ma[27me[27m0[27m5[27m7[27mb[27ma[27m4[27m7[27me[27m [27mb[27ma[27ms[27mh[?1l>[?2004l
+]2;docker exec -it todo-backend_mongo_run_9dae057ba47e bash]1;docker]0;root@0c3c38694a85: /root@0c3c38694a85:/# mongo -u the_username -p the_password
+MongoDB shell version v5.0.4
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("10269517-286f-4db2-a4d3-6fa60ada66c9") }
+MongoDB server version: 5.0.4
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting: 
+        2022-01-11T20:09:13.944+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> show dbs[3G[Jshow dbs[11G
+admin         0.000GB
+config        0.000GB
+local         0.000GB
+the_database  0.000GB
+> use the_database[3G[Juse the_database[19G
+switched to db the_database
+> db.todos.find({})[3G[Jdb.todos.find({})[20G
+{ "_id" : ObjectId("61dddfaafb98cd25b8cf3ac3"), "text" : "Write code", "done" : false }
+{ "_id" : ObjectId("61dddfaafb98cd25b8cf3ac4"), "text" : "Learn about containers", "done" : false }
+> db.todos.insert({ "text": "Increase the number of tools in my toolbelt", "done": false })[3G[Jdb.todos.insert({ "text": "Increase the number of tools in my toolbelt", "done": false })[92G
+WriteResult({ "nInserted" : 1 })
+> [3G[Jdb.todos.insert({ "text": "Increase the number of tools in my toolbelt", "done": false })[92G[3G[Jdb.todos.find({})[20G[3G[Jdb.todos.find({})[20G
+{ "_id" : ObjectId("61dddfaafb98cd25b8cf3ac3"), "text" : "Write code", "done" : false }
+{ "_id" : ObjectId("61dddfaafb98cd25b8cf3ac4"), "text" : "Learn about containers", "done" : false }
+{ "_id" : ObjectId("61dde4ed4a0f4b15c0b7c093"), "text" : "Increase the number of tools in my toolbelt", "done" : false }
+> 
+bye
+]0;root@0c3c38694a85: /root@0c3c38694a85:/# [Kexit
+[1m[7m%[27m[1m[0m                                                                                                ]2;vanntile@vanntile:~/src/fullstack-open-2021/part12/part12-containers-applications/todo-app/todo-backend]1;../todo-backend[0m[27m[24m[J[0m[38;5;242m[49m[39m
+
+[A[0m[44m[38;5;254m  [1m[38;5;254m[44m[38;5;255m~[0m[38;5;255m[44m[44m[38;5;254m/[38;5;250msr[0m[38;5;250m[44m[44m[38;5;254m/[1m[38;5;254m[44m[38;5;255mfullstack-open-2021[0m[38;5;255m[44m[44m[38;5;254m/part12/[38;5;250mp[0m[38;5;250m[44m[44m[38;5;254m/[38;5;250mt[0m[38;5;250m[44m[44m[38;5;254m/[1m[38;5;254m[44m[38;5;255mtodo-backend[0m[38;5;255m[44m[44m[38;5;254m[0m[38;5;254m[44m[44m[38;5;254m [0m[38;5;254m[44m[43m[34m[0m[34m[43m[43m[30m  [30m [30mmaster [30m!3 [30m?6[0m[30m[43m[43m[30m [0m[30m[43m[49m[33m[0m[33m[49m[39m[38;5;242m
+[0m[38;5;242m[49m[39m[0m[49m[38;5;76m❯[0m[38;5;76m[49m[38;5;76m[0m[38;5;76m[49m[30m[0m[30m[49m[39m [0m[49m[39m[K[91C[0m[49m[39m[38;5;242m─╯[39m[93D[?1h=[?2004h[?2004l
+
+Script done on 2022-01-11 22:13:50+02:00 [COMMAND_EXIT_CODE="0"]

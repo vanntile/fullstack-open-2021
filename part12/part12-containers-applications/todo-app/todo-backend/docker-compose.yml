@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    command: npm run dev
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      MONGO_URL: ${MONGO_URL}
+      REDIS_URL: ${REDIS_URL}
+    networks:
+      - app_backend
+
+  mongo:
+    image: mongo:5.0-focal
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASS}
+      MONGO_INITDB_DATABASE: ${DB_NAME}
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    networks:
+      - app_backend
+    volumes:
+    - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    - mongo_volume:/data/db
+
+
+  redis:
+    image: redis:6.2
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    networks:
+      - app_backend
+
+networks:
+  app_backend:
+
+volumes:
+  mongo_volume:
