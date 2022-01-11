@@ -29,4 +29,13 @@ router.get('/:id', (req, res) => {
   }
 })
 
+router.post('/:id/entries', (req, res) => {
+  const { id } = req.params as { id: string }
+  const data = req.body
+
+  const patient = patientsService.createEntry(id, data)
+
+  res.status(201).json(patient)
+})
+
 export default router
